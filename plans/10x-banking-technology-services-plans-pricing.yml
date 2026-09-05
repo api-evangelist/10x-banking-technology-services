@@ -1,0 +1,45 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  https://www.10xbanking.com/ and its sitemap (68 URLs, fetched 2026-09-05). No
+  /pricing, /plans or /packages page exists on any 10x host —
+  https://www.10xbanking.com/pricing returns 404.
+description: >-
+  10x Banking publishes no pricing of any kind. It is an enterprise core banking vendor
+  sold through a demo-and-agreement motion: the only commercial entry points on the
+  public site are a demo booking form and a platform evaluation agreement. No tiers, no
+  list price, no usage rates, no published quota or overage.
+
+plan_count: 0
+pricing_model: enterprise / contact-sales
+currency: null
+free_tier: false
+trial: >-
+  A "platform evaluation agreement" is published at
+  https://www.10xbanking.com/platform-evaluation-agreement (HTTP 200), which is a legal
+  agreement governing an evaluation, not a self-service trial with published terms.
+
+plans: []
+
+commercial_entry_points:
+  - url: https://www.10xbanking.com/book-a-demo
+    status: 200
+    kind: demo request form
+  - url: https://www.10xbanking.com/contact-us
+    status: 200
+    kind: contact form
+  - url: https://www.10xbanking.com/platform-evaluation-agreement
+    status: 200
+    kind: evaluation agreement
+
+probes:
+  - url: https://www.10xbanking.com/pricing
+    status: 404
+  - url: https://www.10xbanking.com/sitemap.xml
+    status: 200
+    note: 68 URLs, none pricing-related.
+
+note: >-
+  plan_count 0 is the finding, not a gap in this pass. For a core banking platform
+  replacing a bank's ledger this is normal commercial practice; it is recorded so the
+  absence is countable rather than mistaken for an unprobed field.

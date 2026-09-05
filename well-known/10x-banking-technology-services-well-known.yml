@@ -1,0 +1,131 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Direct unauthenticated HTTP probes of every host this record knows —
+  the registrable domain and www, the ReadMe-hosted documentation host,
+  the Postman hosted-docs custom domain, and the sandbox API host named
+  by 10x Banking's own public Postman environment.
+description: >-
+  /.well-known/ discovery-document census for 10x Banking. One real document is
+  served: an RTF-encoded security.txt on the marketing domain, carrying a
+  security-disclosures@10xbanking.com contact. Its Expires field is 2025-01-30,
+  so by RFC 9116 the document is stale and should be treated as expired. Every
+  other well-known path returns 404 on the marketing hosts, a login redirect on
+  the documentation host, or a blanket 401 on the API host.
+
+hosts:
+  - host: www.10xbanking.com
+    role: marketing site (registrable domain, Webflow-hosted)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: 10x-banking-technology-services-security.txt
+        content_type: application/rtf
+        note: >-
+          Served as an RTF document rather than the RFC 9116 text/plain, and it is
+          not signed. Contact mailto:security-disclosures@10xbanking.com;
+          Expires 2025-01-30T23:00:00.000Z (past); Preferred-Languages en;
+          Hiring https://www.10xbanking.com/job-vacancies. No Policy field, though
+          a policy is published at https://www.10xbanking.com/responsible-disclosure.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+
+  - host: 10xbanking.com
+    role: apex domain (301s to www)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: 10x-banking-technology-services-security.txt
+        note: Same document as www; apex redirects to www.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+
+  - host: docs.10xbanking.com
+    role: developer documentation (ReadMe, CNAME ssl.readmessl.com)
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/security.txt
+        status: 302
+        note: >-
+          302 to https://dash.readme.com/to/docs-10xbanking — the ReadMe login gate.
+          Every path on this host, including / and /reference, returns the same
+          redirect, so the 200 that follows the redirect is ReadMe's own login page,
+          not a 10x document. Recorded as a miss.
+      - path: /.well-known/ai-plugin.json
+        status: 302
+        note: Login redirect, as above. Not a document.
+      - path: /.well-known/agent-card.json
+        status: 302
+        note: Login redirect, as above. Not a document.
+      - path: /.well-known/agent.json
+        status: 302
+        note: Login redirect, as above. Not a document.
+
+  - host: api.sandbox.10xbanking.com
+    role: sandbox API host (named by 10x's public Postman environment baseUrl)
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 401
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+      - path: /.well-known/oauth-protected-resource
+        status: 401
+      - path: /.well-known/security.txt
+        status: 401
+      - path: /.well-known/api-catalog
+        status: 401
+      - path: /.well-known/ai-plugin.json
+        status: 401
+      - path: /.well-known/agent-card.json
+        status: 401
+      - path: /.well-known/agent.json
+        status: 401
+    note: >-
+      The edge answers 401 with code 401.002.001 on every path including / and
+      unrouted paths, so no discovery document is reachable anonymously and the
+      401 cannot be read as evidence that a given path exists.
+
+  - host: postman.10xbanking.com
+    role: Postman hosted-docs custom domain (CNAME phs.getpostman.com)
+    documents:
+      - path: /
+        status: 404
+        note: >-
+          Postman's "Not found" page — the hosted documentation this custom domain
+          once fronted is no longer published. The team's public workspace still
+          exists at https://www.postman.com/openbanking10x/10x-banking-public-workspace.
+
+summary:
+  hosts_probed: 5
+  documents_served: 1
+  security_txt: served (expired 2025-01-30, application/rtf, unsigned)
+  openid_configuration: none
+  oauth_authorization_server: none
+  api_catalog: none
+  ai_plugin: none
+  agent_card: none

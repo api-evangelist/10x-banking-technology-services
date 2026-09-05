@@ -1,0 +1,59 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live probes of https://api.sandbox.10xbanking.com plus 10x Banking's own public
+  Postman environment (https://www.postman.com/openbanking10x/10x-banking-public-workspace),
+  which declares an `apiKey` variable alongside the sandbox `baseUrl`. No OpenAPI
+  securitySchemes block was available to derive from — 10x publishes no spec.
+description: >-
+  The 10x platform API is fully authenticated at the edge: every path, routed or not,
+  returns 401 to an anonymous caller. The scheme itself is not disclosed publicly. No
+  WWW-Authenticate challenge is returned, no OAuth or OpenID discovery document is
+  served on any 10x host, and the authentication guide is behind the ReadMe login.
+
+status: gated
+public_documentation: false
+docs: https://docs.10xbanking.com/
+docs_status: 302 to https://dash.readme.com/to/docs-10xbanking (login gate)
+
+schemes:
+  - id: undisclosed
+    type: unknown
+    confidence: low
+    evidence:
+      - >-
+        https://api.sandbox.10xbanking.com/ returns HTTP 401 with body
+        {"ref":"...","status":401,"code":"401.002.001","message":"Authentication is
+        required to access this resource."} and NO WWW-Authenticate response header, so
+        the scheme is not advertised per RFC 7235.
+      - >-
+        10x's public Postman environment "10x Banking" carries an `apiKey` variable
+        (empty, for the consumer to fill) next to baseUrl
+        https://api.sandbox.10xbanking.com — first-party evidence pointing at an API-key
+        or token credential the tenant is issued, but the header or parameter name it
+        binds to is not published.
+    note: >-
+      NOT recorded as apiKey. The Postman variable name is suggestive, not dispositive:
+      the environment ships no collection, so nothing shows where the value is placed.
+      Asserting a concrete scheme from a variable name would be a guess.
+
+discovery:
+  openid_configuration: not served (404 on marketing hosts, 401 on the API host)
+  oauth_authorization_server: not served (404 on marketing hosts, 401 on the API host)
+  oauth_protected_resource: not served (401 on the API host)
+  www_authenticate_header: absent
+
+key_issuance:
+  self_service: false
+  mechanism: >-
+    Credentials are issued to tenants under a platform agreement. The public entry
+    points are https://www.10xbanking.com/book-a-demo and the platform evaluation
+    agreement at https://www.10xbanking.com/platform-evaluation-agreement. There is no
+    public sign-up, free tier, or key-generation console.
+
+oauth2:
+  declared: false
+  note: >-
+    No oauth2 securityScheme could be read (no spec) and no OAuth metadata document is
+    served, so no scopes artifact is written. An absent scopes file here means "not
+    published", not "no scopes exist".

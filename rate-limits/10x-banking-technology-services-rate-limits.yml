@@ -1,0 +1,54 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live unauthenticated responses from https://api.sandbox.10xbanking.com (2026-09-05)
+  and a search of every public 10x page. The rate-limit documentation, if any, is behind
+  the ReadMe login at docs.10xbanking.com.
+description: >-
+  No 10x Banking rate limits are published, and no rate-limit signalling appears on any
+  response an anonymous caller can obtain. An agent or client integrating with 10x
+  cannot learn its budget from the docs or from the runtime before it holds credentials.
+
+limit_count: 0
+limits: []
+
+response_headers:
+  observed: []
+  checked:
+    - X-RateLimit-Limit
+    - X-RateLimit-Remaining
+    - X-RateLimit-Reset
+    - RateLimit-Limit
+    - RateLimit-Remaining
+    - RateLimit-Reset
+    - RateLimit-Policy
+    - Retry-After
+  note: >-
+    None present. Full anonymous response header set on
+    https://api.sandbox.10xbanking.com/ is: content-type, content-length, date,
+    apigw-requestid, server, referrer-policy, strict-transport-security,
+    content-security-policy, client-request-id, x-cache, via, x-amz-cf-pop,
+    x-amz-cf-id, vary.
+
+exhaustion_status_code: unknown
+exhaustion_envelope: >-
+  Presumably the standard 10x error envelope { ref, status, code, message } with a
+  429-prefixed code, by analogy with the observed 401.002.001 — but this is NOT
+  confirmed and no 429 was induced. See
+  ../errors/10x-banking-technology-services-problem-types.yml.
+
+evidence:
+  - url: https://api.sandbox.10xbanking.com/
+    status: 401
+    note: No rate-limit headers on the response.
+  - url: https://docs.10xbanking.com/
+    status: 302
+    note: Redirects to the ReadMe login gate; any published limits are inside it.
+  - url: https://www.10xbanking.com/pricing
+    status: 404
+    note: No pricing page, so no quota table either.
+
+note: >-
+  limit_count 0 means "nothing published", not "no limits enforced". The API edge is an
+  API gateway (apigw-requestid header) and will certainly throttle; the throttle is
+  simply invisible from outside.

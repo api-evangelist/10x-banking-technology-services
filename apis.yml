@@ -1,23 +1,167 @@
 aid: 10x-banking-technology-services
 name: 10x Banking Technology Services
-description: '10x Banking Technology Services is a company surfaced via the API Evangelist harvest backlog
-  (source: secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  10x Banking Technology Services is a London-headquartered cloud-native core banking
+  platform vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and
+  "meta core" platform runs retail, business, corporate and embedded-finance banking for
+  institutions including Chase UK, Westpac, Old Mutual, The Co-operative Bank and West
+  Brom Building Society. The platform is sold as an API-first managed core: banks
+  configure products rather than rebuild them, extend the core through the ProductKit
+  SDK, APIs, templates, console and CLI tooling in Java, JavaScript, Python, Go, Ruby or
+  .NET, and consume real-time event streams. The API contract itself is not public — the
+  developer documentation at docs.10xbanking.com redirects every path to a ReadMe login,
+  and the sandbox API host returns a blanket 401 — so this profile records the public
+  surface only.
+image: https://www.10xbanking.com/hubfs/10x-fav-1.svg
 url: https://raw.githubusercontent.com/api-evangelist/10x-banking-technology-services/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-05'
 modified: '2026-09-05'
 tags:
-- Company
-apis: []
+- Financial-Services
+- Banking
+- Core Banking
+- Cloud Native
+- Banking as a Service
+- Embedded Finance
+- Payments
+- Lending
+- Deposits
+- Cards
+- Event Driven
+- United Kingdom
+- SaaS
+- Fintech
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: 10x-banking-platform-api
+  name: 10x Banking Platform API
+  description: >-
+    The REST API surface of the 10x SuperCore platform, covering parties, subscriptions,
+    arrangements, transaction/deposit/loan/credit-card products, repayment schedules,
+    interest overrides, cards, statements, sweeps, notices, cases, disputes, documents
+    and conversations. The domain vocabulary here is read from 10x's own public Postman
+    environment, which is the only first-party machine-readable artifact 10x publishes;
+    the OpenAPI, the reference and the operation list are all behind the ReadMe login at
+    docs.10xbanking.com, and every path on the sandbox host answers 401. The baseURL
+    recorded here is the SANDBOX host — it is the only API host 10x names publicly, and
+    it is named by 10x itself. No production base URL is published; production appears
+    to be tenant-specific.
+  humanURL: https://docs.10xbanking.com/
+  baseURL: https://api.sandbox.10xbanking.com
+  image: https://www.10xbanking.com/hubfs/10x-fav-1.svg
+  position: Producing
+  tags:
+  - Core Banking
+  - Banking
+  - Accounts
+  - Payments
+  - Lending
+  - Deposits
+  - Cards
+  properties:
+  - type: Documentation
+    url: https://docs.10xbanking.com/
+  - type: Authentication
+    url: authentication/10x-banking-technology-services-authentication.yml
+  - type: Conventions
+    url: conventions/10x-banking-technology-services-conventions.yml
+  - type: ErrorCatalog
+    url: errors/10x-banking-technology-services-problem-types.yml
+  - type: Sandbox
+    url: sandbox/10x-banking-technology-services-sandbox.yml
+  - type: RateLimits
+    url: rate-limits/10x-banking-technology-services-rate-limits.yml
+  - type: Postman
+    url: https://www.postman.com/openbanking10x/10x-banking-public-workspace/overview
 common:
 - type: Website
-  url: https://www.hiive.com/securities/10x-banking-technology-services-stock
+  url: https://www.10xbanking.com/
+- type: DeveloperPortal
+  url: https://docs.10xbanking.com/
+- type: Documentation
+  url: https://docs.10xbanking.com/
+- type: Blog
+  url: https://www.10xbanking.com/insights
+- type: BlogFeed
+  url: https://www.10xbanking.com/engineering
+- type: Newsroom
+  url: https://www.10xbanking.com/news
+- type: Support
+  url: https://www.10xbanking.com/contact-us
+- type: SignUp
+  url: https://www.10xbanking.com/book-a-demo
+- type: PrivacyPolicy
+  url: https://www.10xbanking.com/privacy-policy
+- type: TermsOfService
+  url: https://www.10xbanking.com/platform-evaluation-agreement
+- type: LinkedIn
+  url: https://www.linkedin.com/company/10x-banking
+- type: Postman
+  url: https://www.postman.com/openbanking10x/10x-banking-public-workspace/overview
+- type: Security
+  url: https://www.10xbanking.com/responsible-disclosure
+- type: VulnerabilityDisclosure
+  url: security/10x-banking-technology-services-vulnerability-disclosure.yml
+- type: SecurityTxt
+  url: well-known/10x-banking-technology-services-security.txt
+- type: WellKnown
+  url: well-known/10x-banking-technology-services-well-known.yml
+- type: DomainSecurity
+  url: security/10x-banking-technology-services-domain-security.yml
+- type: Authentication
+  url: authentication/10x-banking-technology-services-authentication.yml
+- type: Conventions
+  url: conventions/10x-banking-technology-services-conventions.yml
+- type: ErrorCatalog
+  url: errors/10x-banking-technology-services-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/10x-banking-technology-services-lifecycle.yml
+- type: ChangeLog
+  url: changelog/10x-banking-technology-services-changelog.yml
+- type: Sandbox
+  url: sandbox/10x-banking-technology-services-sandbox.yml
+- type: RateLimits
+  url: rate-limits/10x-banking-technology-services-rate-limits.yml
+- type: Plans
+  url: plans/10x-banking-technology-services-plans-pricing.yml
+- type: Packages
+  url: packages/10x-banking-technology-services-packages.yml
+- type: Conformance
+  url: conformance/10x-banking-technology-services-conformance.yml
+- type: LLMsTxt
+  url: llms/10x-banking-technology-services-llms.txt
+x-enrichment:
+  date: '2026-09-05'
+  status: minimal
+  artifacts_added: 17
+  pass: local-v3
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Every path on docs.10xbanking.com — including /, /reference and /changelog — returns
+    HTTP 302 to https://dash.readme.com/to/docs-10xbanking, the ReadMe login for 10x's
+    private documentation project, and the sandbox API host 10x names in its own public
+    Postman environment answers HTTP 401 (code 401.002.001) on every path including
+    /openapi.json and every /.well-known/ location.
+  evidence:
+    - url: https://docs.10xbanking.com/
+      status: 302
+    - url: https://docs.10xbanking.com/reference
+      status: 302
+    - url: https://api.sandbox.10xbanking.com/openapi.json
+      status: 401
+    - url: https://api.sandbox.10xbanking.com/.well-known/oauth-authorization-server
+      status: 401
+    - url: https://postman.10xbanking.com/
+      status: 404
+    - url: https://www.10xbanking.com/.well-known/security.txt
+      status: 200
+  checked: '2026-09-05'

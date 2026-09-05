@@ -1,0 +1,119 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live probes of api.sandbox.10xbanking.com, www.10xbanking.com and
+  docs.10xbanking.com, plus the 10x partner and platform pages. No OpenAPI, AsyncAPI,
+  GraphQL SDL or WSDL is published by 10x, so no contract could be read for a
+  domain-standard signature — every entry below is grounded in something actually
+  fetched, and nothing is asserted from the marketing copy.
+description: >-
+  Cross-cutting and domain standards conformance for 10x Banking, measured against the
+  public surface. Two negatives are established from live evidence (the error envelope
+  is not RFC 9457; the security.txt is not RFC 9116-valid). Everything a core banking
+  vendor would be expected to conform to — ISO 20022, UK Open Banking, FAPI, BIAN — is
+  undetermined, because the contract that would declare it is not published.
+
+conformance:
+  - id: rfc9457
+    label: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      https://api.sandbox.10xbanking.com/ returns content-type application/json with a
+      proprietary envelope {ref, status, code, message}. It is not
+      application/problem+json and carries none of type/title/detail/instance.
+      Observed 2026-09-05.
+
+  - id: rfc9116
+    label: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      https://www.10xbanking.com/.well-known/security.txt returns HTTP 200 but with
+      content-type application/rtf and an RTF-encoded body rather than the required
+      text/plain, and its Expires field is 2025-01-30T23:00:00.000Z — in the past. The
+      document is served and its Contact field is usable by a human, but it does not
+      conform and a parser cannot read it.
+
+  - id: rfc7235-auth-challenge
+    label: RFC 7235 WWW-Authenticate challenge
+    conforms: false
+    evidence: >-
+      https://api.sandbox.10xbanking.com/ returns 401 with no WWW-Authenticate response
+      header, so the authentication scheme is never advertised. Observed 2026-09-05.
+
+  - id: hsts
+    label: HTTP Strict Transport Security
+    conforms: true
+    evidence: >-
+      strict-transport-security: max-age=31536000; includeSubDomains on
+      api.sandbox.10xbanking.com, and present on www.10xbanking.com and
+      docs.10xbanking.com. See
+      ../security/10x-banking-technology-services-domain-security.yml.
+
+  - id: oauth2
+    label: OAuth 2.0
+    conforms: undetermined
+    evidence: >-
+      No /.well-known/oauth-authorization-server or /.well-known/oauth-protected-resource
+      is served on any 10x host (404 on the marketing hosts, 401 on the API host), and
+      the authentication guide is behind the ReadMe login. Neither presence nor absence
+      of OAuth could be established.
+
+  - id: oidc
+    label: OpenID Connect
+    conforms: undetermined
+    evidence: >-
+      /.well-known/openid-configuration returns 404 on www.10xbanking.com and
+      10xbanking.com and 401 on api.sandbox.10xbanking.com.
+
+  - id: iso-20022
+    label: ISO 20022 financial messaging
+    conforms: undetermined
+    evidence: >-
+      No published contract to inspect for pacs/pain/camt message types. 10x names no
+      ISO 20022 message shape on any public page. NOT recorded as false — a core banking
+      platform clearing UK payments almost certainly speaks it internally; the point is
+      that no public artifact declares it.
+
+  - id: uk-open-banking
+    label: UK Open Banking (OBIE) Read/Write API
+    conforms: undetermined
+    delivered_by_partner: true
+    evidence: >-
+      https://www.10xbanking.com/partner-ozone-api states "By integrating 10x SuperCore
+      with Ozone API, banks can deliver standards-compliant open banking APIs
+      cost-effectively, within weeks and not months", and describes Ozone as the
+      component that "enables banks and financial institutions to expose standards
+      compliant open APIs". The conformant surface is therefore ORIZON — Ozone's layer
+      over 10x — not a 10x contract. Recording this as 10x conformance would credit 10x
+      with a partner's artifact.
+
+  - id: fapi
+    label: FAPI / FAPI 2.0
+    conforms: undetermined
+    evidence: >-
+      Not claimed on any public 10x page and not readable from a contract. Same partner
+      caveat as uk-open-banking.
+
+  - id: bian
+    label: BIAN Service Landscape
+    conforms: undetermined
+    evidence: No BIAN service-domain naming is visible in any public 10x artifact.
+
+domain_standard:
+  detected: false
+  standard: null
+  evidence: >-
+    REWARD-ONLY CHECK, DELIBERATELY LEFT EMPTY. A domain-standard signature must be read
+    out of the contract itself — an ISO 20022 message type, a BIAN service domain, an
+    OBIE resource path, an FDX entity. 10x publishes no contract, so there is nothing to
+    read. The only machine-readable first-party artifact is a Postman ENVIRONMENT whose
+    variable names (partyKey, arrangementKey, subscriptionKey, productKey) are 10x's own
+    domain vocabulary and match no standard's identifier scheme. Nothing is claimed.
+
+compliance_certifications:
+  published: false
+  evidence: >-
+    No trust centre, no SOC 2 / ISO 27001 / PCI DSS page and no compliance portal on any
+    10x host; probe-security-programs.py returned trust=none. No Compliance pointer is
+    emitted. For a vendor running core banking for Chase UK and Westpac these
+    attestations are near-certain to exist under NDA; they are not on the open web.

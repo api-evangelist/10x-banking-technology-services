@@ -1,0 +1,40 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  https://docs.10xbanking.com/changelog (HTTP 302 to
+  https://dash.readme.com/to/docs-10xbanking?redirect=%2Fchangelog) and
+  https://www.10xbanking.com/news (HTTP 200).
+description: >-
+  10x Banking's documentation runs on ReadMe, which ships a changelog surface at
+  /changelog, and 10x's instance answers on that path — but with the same login redirect
+  as every other path on the host. So a dated API changelog very likely exists and is
+  simply not public. What IS public is a marketing news feed, which is not an API
+  changelog.
+
+public: false
+scheme: unknown
+current_version: unknown
+entries: []
+entry_count: 0
+
+probes:
+  - url: https://docs.10xbanking.com/changelog
+    status: 302
+    redirect: https://dash.readme.com/to/docs-10xbanking?redirect=%2Fchangelog
+    note: >-
+      ReadMe's login gate. The path is the ReadMe changelog convention, so the surface
+      exists behind the wall.
+  - url: https://www.10xbanking.com/news
+    status: 200
+    note: >-
+      Company news and press releases (funding, partnerships, customer wins, platform
+      launches). Not a versioned API changelog — no dates tied to API changes, no
+      breaking-change markers, no operation-level detail.
+  - url: https://www.10xbanking.com/insights
+    status: 200
+    note: Thought-leadership blog. Same limitation.
+
+note: >-
+  entry_count 0 records that no dated API change entry is publicly readable. It is not a
+  claim that 10x ships without a changelog — the ReadMe /changelog path answering is
+  evidence to the contrary.

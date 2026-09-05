@@ -1,0 +1,88 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  Registry searches of npm (registry.npmjs.org), PyPI, Maven Central, NuGet,
+  pkg.go.dev, RubyGems, Packagist and crates.io; a GitHub organisation search for
+  10x-banking / 10xbanking / tenxbanking; and the public 10x marketing and platform
+  pages.
+description: >-
+  10x Banking markets a "ProductKit" SDK and CLI as a core part of the platform and
+  advertises polyglot extension in Java, JavaScript, .NET, Ruby, Python and Go, but no
+  first-party 10x client library is published to any public package registry, and 10x
+  operates no public GitHub organisation. The SDK is distributed to tenants, not to the
+  open web.
+
+package_count: 0
+official_packages: []
+
+vendor_claim:
+  product: ProductKit
+  claim: >-
+    "SDK and API's to build and maintain full-featured financial Virtual Products",
+    with "Templates, Console and CLI tooling" and support to "code in your language of
+    choice Java, JS, .NET, Ruby, Python, Go".
+  source: https://www.10xbanking.com/platform/cloud-core-banking
+  public_distribution: false
+
+registries_checked:
+  - registry: npm
+    query: '10xbanking'
+    results: 0
+    version: null
+    published: null
+  - registry: npm
+    query: '10x-banking'
+    results: 0
+    version: null
+    published: null
+  - registry: pypi
+    results: 0
+    version: null
+    published: null
+  - registry: maven-central
+    results: 0
+    version: null
+    published: null
+  - registry: nuget
+    results: 0
+    version: null
+    published: null
+  - registry: rubygems
+    results: 0
+    version: null
+    published: null
+  - registry: pkg.go.dev
+    results: 0
+    version: null
+    published: null
+  - registry: packagist
+    results: 0
+    version: null
+    published: null
+  - registry: crates.io
+    results: 0
+    version: null
+    published: null
+
+github:
+  organisation: none
+  probed:
+    - url: https://api.github.com/orgs/10x-banking
+      status: 404
+    - url: https://api.github.com/orgs/10xbanking
+      status: 404
+    - url: https://api.github.com/orgs/tenxbanking
+      status: 404
+  repository_search: >-
+    A GitHub code search for "10xbanking" returns three third-party repositories
+    (Ragul-Dhandapani/money-transfer-service, Jtech-code1/10xBanking,
+    tusharranjan719/POC-10xBanking). None is operated by 10x Banking; all are unrelated
+    student/POC projects that happen to use the name. Explicitly NOT recorded as
+    first-party.
+
+note: >-
+  package_count 0 is a measurement of the public registries, not a claim that the
+  ProductKit SDK does not exist. It does exist; 10x distributes it under agreement. The
+  consequence for a buyer is that the SDK's release cadence, its supported runtimes and
+  its currency cannot be inspected before signing — the abandonment signal a dated
+  registry release provides is unavailable here.

@@ -1,0 +1,132 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live probes of https://api.sandbox.10xbanking.com and 10x Banking's public Postman
+  environment. The cross-cutting conventions guide lives in the login-gated reference at
+  docs.10xbanking.com, so most fields below record an absence of PUBLIC evidence rather
+  than an absence of the mechanism.
+description: >-
+  Cross-cutting request/response semantics for the 10x Banking Platform API. This file
+  measures the PUBLIC surface only. 10x gates its entire developer reference behind a
+  ReadMe login and its API behind a blanket 401, so an integrator — or an agent —
+  evaluating 10x before signing an agreement can establish almost none of this.
+
+base_url: https://api.sandbox.10xbanking.com
+base_url_note: >-
+  Sandbox. Production base URLs appear to be tenant-specific and are not published. This
+  host is named by 10x's own public Postman environment, not inferred from the domain.
+api_style: REST over HTTPS, JSON responses
+
+authentication:
+  scheme: undisclosed — 401 on every path, no WWW-Authenticate header
+  detail: ../authentication/10x-banking-technology-services-authentication.yml
+
+idempotency:
+  supported: unknown
+  coverage: none
+  mechanism: null
+  evidence: >-
+    No Idempotency-Key or equivalent header is documented on any public 10x page, no
+    OpenAPI is published to read a header parameter from, and the API cannot be
+    exercised anonymously. `coverage: none` records that NO replay protection is
+    publicly evidenced — it is a measurement of the public surface, not a claim that the
+    platform lacks the mechanism internally.
+  note: >-
+    Core banking is exactly the domain where replay protection matters most, and 10x
+    almost certainly implements it. It is simply not discoverable, which is the finding.
+
+pagination:
+  style: unknown
+  evidence: >-
+    Not documented publicly. The Postman environment exposes only entity key variables
+    (partyKey, subscriptionKey, transactionKey, arrangementKey…), which suggests
+    key-addressed resources but says nothing about list semantics.
+
+field_expansion:
+  supported: unknown
+
+metadata:
+  supported: unknown
+
+request_tracing:
+  request_id_field: ref
+  mechanism: >-
+    Every response body carries a `ref` UUID, unique per request, usable as a support
+    correlation reference. The API edge additionally returns `client-request-id` and
+    `apigw-requestid` response headers.
+  correlation_key: >-
+    The public Postman environment declares a `correlationKey` variable, indicating a
+    client-supplied correlation identifier is part of the request contract, but the
+    header or field it binds to is not published.
+  evidence: >-
+    Observed on https://api.sandbox.10xbanking.com/ 2026-09-05 — headers
+    client-request-id and apigw-requestid, body field ref.
+
+versioning:
+  scheme: unknown
+  public_policy: false
+  note: >-
+    10x markets platform releases by number (version 10.0 of the core banking platform
+    was announced publicly), but no API versioning scheme — URI segment, header, or date
+    — is published. The Postman environment carries product-version variables
+    (sandboxDepositProductVersion, productVersion), which version BANKING PRODUCTS, not
+    the API.
+  detail: ../lifecycle/10x-banking-technology-services-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  rfc9457: false
+  shape: '{ ref, status, code, message }'
+  code_format: HTTP.GROUP.SEQUENCE (observed 401.002.001)
+  detail: ../errors/10x-banking-technology-services-problem-types.yml
+
+rate_limit_signaling:
+  headers: none observed
+  evidence: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appears on any anonymous
+    response from api.sandbox.10xbanking.com. Whether limits are signalled to
+    authenticated callers cannot be established from outside.
+  detail: ../rate-limits/10x-banking-technology-services-rate-limits.yml
+
+dry_run_mode:
+  supported: unknown
+  note: >-
+    Not publicly documented. A sandbox environment exists (see
+    ../sandbox/10x-banking-technology-services-sandbox.yml) but a sandbox is a separate
+    environment, not a dry-run flag on a production write.
+
+reversibility:
+  grade: none
+  state: undocumented
+  evidence: >-
+    No public 10x page or spec documents a reversal operation or a reversal window for
+    any write. Nothing in the public Postman environment names a cancel, refund, void,
+    reverse or restore surface. The reference that would state them is behind the ReadMe
+    login at docs.10xbanking.com (302 to dash.readme.com).
+  write_surface: >-
+    Presumed present — the entity vocabulary in 10x's own Postman environment includes
+    arrangements, subscriptions, transactions, cards, sweeps, disputes and cases, which
+    are written, not merely read. So `na` would be wrong: this is an undocumented
+    reversibility posture on a real write surface, not a read-only API.
+  reversal_operations: []
+  windows: []
+  note: >-
+    NO WINDOW IS ASSERTED. Core banking has reversal semantics — transaction reversal,
+    dispute chargeback, arrangement cancellation — and 10x's entity list implies them,
+    but implying is not documenting. An invented window here could cost a user real
+    money, so none is recorded.
+
+public_surface_summary:
+  determinable_from_public_sources:
+    - error envelope shape and one error code
+    - request/response correlation identifiers
+    - the sandbox base URL
+    - the entity vocabulary (from the public Postman environment)
+  not_determinable:
+    - authentication scheme
+    - idempotency mechanism and coverage
+    - pagination style
+    - versioning and deprecation policy
+    - rate limits and their headers
+    - reversibility operations and windows
+    - the operation list itself

@@ -64,5 +64,38 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-10x Banking Technology Services is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/10x-banking-technology-services-stock
+10x Banking Technology Services is a London-headquartered cloud-native core banking platform
+vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and "meta core" platform
+runs retail, business, corporate and embedded-finance banking for institutions including Chase UK,
+Westpac, Old Mutual, The Co-operative Bank and West Brom Building Society. The platform is sold as
+an API-first managed core: banks configure banking products rather than rebuild them, extend the
+core through the ProductKit SDK, APIs, templates, console and CLI tooling, and consume real-time
+event streams.
+
+## Why this profile is thin
+
+**The API contract is not public.** Every path on `docs.10xbanking.com` — including `/`,
+`/reference` and `/changelog` — returns HTTP 302 to the ReadMe login for 10x's private
+documentation project, and the sandbox API host returns HTTP 401 on every path, including
+`/openapi.json` and every `/.well-known/` location. As of 2026-09-05 there is no published
+OpenAPI, AsyncAPI, GraphQL SDL, WSDL, Protobuf, MCP server or agent card, and no first-party SDK
+on any public package registry.
+
+What 10x *does* publish, and what this profile is built from:
+
+- A **public Postman environment** (`10x Banking`, team *10X Open Banking*) naming the sandbox base
+  URL `https://api.sandbox.10xbanking.com` and 61 entity variables that reveal the platform's
+  domain vocabulary. It is the only first-party machine-readable artifact 10x publishes. The
+  workspace itself contains no collections.
+- A **responsible disclosure policy** with safe-harbour language and a dedicated intake address.
+- A **`/.well-known/security.txt`** — served, but expired (`Expires: 2025-01-30`) and delivered as
+  `application/rtf` rather than the RFC 9116 `text/plain`.
+- A live **error envelope**, observed directly: `{ ref, status, code, message }` with dotted numeric
+  codes. Not RFC 9457.
+
+Not published: pricing (`/pricing` 404), a status page (`status.10xbanking.com` does not resolve),
+a versioning or deprecation policy, an SLA, a changelog, a GitHub organisation, rate limits, or a
+trust centre.
+
+**Are we wrong?** If 10x publishes a spec, a status page or a changelog we did not find, open an
+issue and we will re-score within five business days.

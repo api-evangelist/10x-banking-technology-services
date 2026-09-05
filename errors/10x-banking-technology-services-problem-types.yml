@@ -1,0 +1,74 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  Live unauthenticated requests to https://api.sandbox.10xbanking.com — the sandbox
+  base URL 10x publishes in its own public Postman environment. The full error
+  catalogue is inside the login-gated reference at docs.10xbanking.com; what is
+  recorded here is only what the API actually returned to an anonymous caller.
+description: >-
+  10x Banking returns a proprietary JSON error envelope, not RFC 9457
+  application/problem+json. The envelope is stable and machine-friendly — a
+  correlation reference, the HTTP status, a dotted numeric error code and a human
+  message — but the code registry that would let a client branch on `code` is not
+  published, so only the one code observed live is catalogued here.
+
+format: proprietary-json
+media_type: application/json
+rfc9457: false
+
+envelope:
+  fields:
+    ref: >-
+      UUID v4, unique per response. A correlation/support reference — a different value
+      is returned on every request, including repeats of the same request.
+    status: Integer, mirrors the HTTP status code.
+    code: >-
+      Dotted numeric error code, observed shape HTTP.GROUP.SEQUENCE — e.g. 401.002.001,
+      where the first segment repeats the HTTP status, the second appears to identify an
+      error family and the third the specific condition within it.
+    message: Human-readable English sentence. No field-level or parameter-level detail
+      is returned to an unauthenticated caller.
+  example:
+    ref: 9dcaa96b-651f-4155-9ccc-44e4a65fbdb6
+    status: 401
+    code: 401.002.001
+    message: Authentication is required to access this resource.
+  absent_fields:
+    - type (RFC 9457 problem type URI)
+    - title
+    - detail
+    - instance
+    - errors[] / field-level violations
+
+problem_types:
+  - code: 401.002.001
+    status: 401
+    title: Authentication required
+    message: Authentication is required to access this resource.
+    observed: true
+    evidence: >-
+      Returned by https://api.sandbox.10xbanking.com/ and by every other path probed on
+      that host on 2026-09-05, including /openapi.json, /graphql, /mcp, /v1/parties and
+      every /.well-known/* path.
+    remediation: >-
+      Present platform credentials. 10x issues them to tenants; there is no public
+      self-service key issuance, so an anonymous caller cannot resolve this.
+
+coverage:
+  observed_codes: 1
+  documented_codes: 0
+  note: >-
+    Exactly one error code is reachable without credentials, because the edge
+    authenticates before routing: unrouted paths return the same 401.002.001 as real
+    ones. No public error-code reference exists on any 10x host, so 4xx/5xx behaviour
+    beyond authentication could not be measured and is NOT guessed here.
+
+defects:
+  - >-
+    No public error reference. A client integrating against 10x cannot enumerate the
+    codes it must handle before it has a tenant.
+  - >-
+    The envelope is not RFC 9457, so generic problem-details tooling does not apply.
+  - >-
+    The edge returns 401 rather than 404 for paths that do not exist, which is a
+    defensible security posture but means a 401 is not evidence that a path is real.

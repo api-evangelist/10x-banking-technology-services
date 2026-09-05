@@ -1,0 +1,86 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  10x Banking's public Postman environment "10x Banking"
+  (https://www.postman.com/openbanking10x/10x-banking-public-workspace, team "10X Open
+  Banking", published 2023-09-07, last updated 2026-08-20) plus a live probe of the host
+  it names. A verbatim copy of the environment is saved at
+  ../postman/10x-banking-technology-services-postman-environment.json.
+description: >-
+  10x operates a sandbox environment at api.sandbox.10xbanking.com and publishes a
+  Postman environment file for it. The environment is real and first-party, but it is a
+  variable skeleton: 59 of its 61 variables ship empty for the consumer to populate, and
+  the workspace contains no collection to run them against. So there is a named sandbox
+  and a base URL, but no public test data, no test credentials and no runnable request.
+
+sandbox:
+  exists: true
+  base_url: https://api.sandbox.10xbanking.com
+  base_url_status: 401
+  self_service_signup: false
+  access: >-
+    Credentials are issued to tenants. The sandbox host answers 401 to every anonymous
+    request, so nothing in it is exercisable without an agreement. Public entry points
+    are https://www.10xbanking.com/book-a-demo and
+    https://www.10xbanking.com/platform-evaluation-agreement.
+
+test_vs_live:
+  separation: separate host
+  detail: >-
+    The sandbox is a distinct hostname (api.sandbox.10xbanking.com). No test-vs-live key
+    prefix convention is published, and 10x publishes no production base URL to compare
+    it against — production appears to be tenant-specific.
+
+published_environment:
+  name: 10x Banking
+  forked_from: '10x Banking (private team environment, created 2023-09-06)'
+  file: ../postman/10x-banking-technology-services-postman-environment.json
+  variable_count: 61
+  populated_variables:
+    - key: baseUrl
+      value: https://api.sandbox.10xbanking.com
+    - key: noticeKey
+      value: 751efb91-83b6-4492-96e8-d24a53365e19
+      note: >-
+        The only sample identifier 10x publishes. A notice key UUID, left populated in
+        the environment. Recorded verbatim; not exercisable without credentials.
+  empty_variables: 59
+  sandbox_specific_variables:
+    - sandboxTransactionProductKey
+    - sandboxDepositProductKey
+    - sandboxLoanProductKey
+    - sandboxTermMaturityProductKey
+    - sandboxCreditCardProductKey
+    - sandboxTransactionProductVersion
+    - sandboxDepositProductVersion
+    - sandboxLoanProductVersion
+    - sandboxTermMaturityProductVersion
+    - sandboxCreditCardProductVersion
+    - sandboxTransactionProductCurrency
+    - sandboxDepositProductCurrency
+    - sandboxLoanProductCurrency
+    - sandboxTermMaturityProductCurrency
+    - sandboxCreditCardProductCurrency
+  note: >-
+    Every sandbox product key, version and currency variable ships EMPTY. A consumer
+    cannot learn which products the sandbox is seeded with, which is the one thing a
+    published sandbox environment is for.
+
+test_values:
+  test_cards: none published
+  test_bank_accounts: none published
+  test_tokens: none published
+  fixtures: none published
+  triggers: none published
+  time_simulation: not documented publicly
+
+defects:
+  - >-
+    The Postman workspace is public but contains zero collections and zero APIs — only
+    this environment and a globals entry. There is nothing to send.
+  - >-
+    postman.10xbanking.com (CNAME phs.getpostman.com) returns Postman's "Not found"
+    page: the hosted documentation that custom domain once fronted has been unpublished.
+  - >-
+    No seeded test data of any kind is published, so the sandbox cannot be evaluated,
+    only requested.

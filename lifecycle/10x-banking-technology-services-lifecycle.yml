@@ -1,0 +1,63 @@
+generated: '2026-09-05'
+method: searched
+source: >-
+  The public 10x site and sitemap, plus DNS probes for a status host and HTTP probes of
+  docs.10xbanking.com. Any versioning or deprecation policy is inside the login-gated
+  reference.
+description: >-
+  10x Banking publishes no API versioning policy, no deprecation policy, no SLA and no
+  status page on the open web. Platform releases are announced as marketing news (version
+  10.0 of the core banking platform, the "meta core" launch), which tells a buyer the
+  product moves but tells an integrator nothing about how a breaking change reaches them.
+
+versioning:
+  scheme: not published
+  mechanism: unknown
+  current_api_version: unknown
+  platform_releases_announced_publicly: true
+  platform_release_note: >-
+    10x announced "version 10.0 of its core banking platform" and the "meta core" launch
+    through press channels. These are product releases, not API versions, and no mapping
+    between the two is published.
+
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  rfc8594: unknown
+  deprecated_operations: []
+  note: >-
+    No OpenAPI is published, so no operation could be marked deprecated by derivation
+    either. Both the policy and the per-operation signal are unavailable.
+
+sla:
+  published: false
+  marketing_claim: >-
+    "99.99% World-class uptime" is stated on https://www.10xbanking.com/ as a platform
+    statistic. It is a marketing figure with no published measurement window, no
+    exclusions, no credits and no contractual commitment attached.
+  contractual_terms: not public
+
+status_page:
+  exists: false
+  probes:
+    - host: status.10xbanking.com
+      result: NXDOMAIN
+    - url: https://www.10xbanking.com/sitemap.xml
+      status: 200
+      note: 68 URLs; no status, uptime or incident-history page among them.
+  third_party: >-
+    No Statuspage, Instatus, Better Stack or StatusCake page was found for 10x Banking.
+    Tenant-facing incident communication, if it exists, runs through the gated platform.
+
+changelog:
+  public: false
+  detail: ../changelog/10x-banking-technology-services-changelog.yml
+
+defects:
+  - >-
+    No public status page for a platform that markets 99.99% uptime and processes
+    accounts for Chase UK and Westpac. The uptime claim is unverifiable by anyone
+    outside a tenancy.
+  - No deprecation policy, so no notice period is knowable before signing.
+  - No versioning scheme, so an integrator cannot pin.

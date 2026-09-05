@@ -1,0 +1,60 @@
+generated: '2026-09-05'
+method: probed
+source: >-
+  A search for an official 10x Banking MCP server (web search, the 10x site and sitemap,
+  npm, PyPI and GitHub) and a live JSON-RPC probe of the only 10x API host that exists.
+description: >-
+  10x Banking ships no MCP server, hosted or local, and no candidate tool list could be
+  derived because 10x publishes no OpenAPI to derive one from. This file records the
+  negative result so it is countable; NO MCPServer pointer is wired into apis.yml.
+
+status: none
+tools: []
+tool_count: 0
+
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+
+probes:
+  - url: https://api.sandbox.10xbanking.com/mcp
+    method: POST
+    body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    accept: application/json, text/event-stream
+    status: 401
+    response: >-
+      {"ref":"...","status":401,"code":"401.002.001","message":"Authentication is
+      required to access this resource."}
+    interpretation: >-
+      NOT an MCP OAuth challenge. This host returns the identical 401.002.001 envelope on
+      every path including ones that certainly do not exist, so this response is evidence
+      of a blanket edge gate, not of an MCP endpoint. It must not be read as a gated MCP
+      server.
+  - url: https://www.10xbanking.com/.well-known/ai-plugin.json
+    status: 404
+  - url: https://docs.10xbanking.com/
+    status: 302
+    note: ReadMe login gate; any MCP documentation would be inside it.
+
+searches:
+  - npm registry for 10xbanking / 10x-banking — 0 results
+  - GitHub organisation 10x-banking / 10xbanking / tenxbanking — 404
+  - web search for a 10x Banking MCP server — no first-party result
+
+derivation:
+  attempted: true
+  possible: false
+  reason: >-
+    A candidate tool list is derived from OpenAPI operationIds. 10x publishes no OpenAPI,
+    Swagger, GraphQL SDL, AsyncAPI or WSDL, and its public Postman workspace contains
+    zero collections — so there is no operation list anywhere to bind tools to. No
+    candidate is written. Inventing tool names from the entity vocabulary in the Postman
+    environment would be fabrication.
+
+note: >-
+  No tool-crosswalk artifact is written either: a crosswalk binds MCP tools to OpenAPI
+  operationIds, and neither side exists.
