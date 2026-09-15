@@ -1,17 +1,14 @@
 aid: 10x-banking-technology-services
 name: 10x Banking Technology Services
-description: >-
-  10x Banking Technology Services is a London-headquartered cloud-native core banking
-  platform vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and
-  "meta core" platform runs retail, business, corporate and embedded-finance banking for
-  institutions including Chase UK, Westpac, Old Mutual, The Co-operative Bank and West
-  Brom Building Society. The platform is sold as an API-first managed core: banks
-  configure products rather than rebuild them, extend the core through the ProductKit
-  SDK, APIs, templates, console and CLI tooling in Java, JavaScript, Python, Go, Ruby or
-  .NET, and consume real-time event streams. The API contract itself is not public — the
-  developer documentation at docs.10xbanking.com redirects every path to a ReadMe login,
-  and the sandbox API host returns a blanket 401 — so this profile records the public
-  surface only.
+description: '10x Banking Technology Services is a London-headquartered cloud-native core banking platform
+  vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and "meta core" platform runs
+  retail, business, corporate and embedded-finance banking for institutions including Chase UK, Westpac,
+  Old Mutual, The Co-operative Bank and West Brom Building Society. The platform is sold as an API-first
+  managed core: banks configure products rather than rebuild them, extend the core through the ProductKit
+  SDK, APIs, templates, console and CLI tooling in Java, JavaScript, Python, Go, Ruby or .NET, and consume
+  real-time event streams. The API contract itself is not public — the developer documentation at docs.10xbanking.com
+  redirects every path to a ReadMe login, and the sandbox API host returns a blanket 401 — so this profile
+  records the public surface only.'
 image: https://www.10xbanking.com/hubfs/10x-fav-1.svg
 url: https://raw.githubusercontent.com/api-evangelist/10x-banking-technology-services/refs/heads/main/apis.yml
 x-type: company
@@ -20,6 +17,21 @@ specificationVersion: '0.20'
 created: '2026-09-05'
 modified: '2026-09-05'
 tags:
+- Financial-Services
+- Banking
+- Core Banking
+- Cloud-Native
+- Banking as a Service
+- Embedded Finance
+- Payments
+- Lending
+- Deposits
+- Cards
+- Event-Driven
+- United Kingdom
+- Software-as-a-Service
+- Fintech
+tags_raw:
 - Financial-Services
 - Banking
 - Core Banking
@@ -40,24 +52,29 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: 10x-banking-platform-api
+- aid: 10x-banking-technology-services:10x-banking-platform-api
   name: 10x Banking Platform API
-  description: >-
-    The REST API surface of the 10x SuperCore platform, covering parties, subscriptions,
-    arrangements, transaction/deposit/loan/credit-card products, repayment schedules,
-    interest overrides, cards, statements, sweeps, notices, cases, disputes, documents
-    and conversations. The domain vocabulary here is read from 10x's own public Postman
-    environment, which is the only first-party machine-readable artifact 10x publishes;
-    the OpenAPI, the reference and the operation list are all behind the ReadMe login at
-    docs.10xbanking.com, and every path on the sandbox host answers 401. The baseURL
-    recorded here is the SANDBOX host — it is the only API host 10x names publicly, and
-    it is named by 10x itself. No production base URL is published; production appears
-    to be tenant-specific.
+  description: The REST API surface of the 10x SuperCore platform, covering parties, subscriptions, arrangements,
+    transaction/deposit/loan/credit-card products, repayment schedules, interest overrides, cards, statements,
+    sweeps, notices, cases, disputes, documents and conversations. The domain vocabulary here is read
+    from 10x's own public Postman environment, which is the only first-party machine-readable artifact
+    10x publishes; the OpenAPI, the reference and the operation list are all behind the ReadMe login at
+    docs.10xbanking.com, and every path on the sandbox host answers 401. The baseURL recorded here is
+    the SANDBOX host — it is the only API host 10x names publicly, and it is named by 10x itself. No production
+    base URL is published; production appears to be tenant-specific.
   humanURL: https://docs.10xbanking.com/
   baseURL: https://api.sandbox.10xbanking.com
   image: https://www.10xbanking.com/hubfs/10x-fav-1.svg
   position: Producing
   tags:
+  - Core Banking
+  - Banking
+  - Account
+  - Payments
+  - Lending
+  - Deposits
+  - Cards
+  tags_raw:
   - Core Banking
   - Banking
   - Accounts
@@ -145,23 +162,21 @@ x-enrichment:
 x-coverage:
   state: gated
   reason: customer-only-docs
-  detail: >-
-    Every path on docs.10xbanking.com — including /, /reference and /changelog — returns
-    HTTP 302 to https://dash.readme.com/to/docs-10xbanking, the ReadMe login for 10x's
-    private documentation project, and the sandbox API host 10x names in its own public
-    Postman environment answers HTTP 401 (code 401.002.001) on every path including
-    /openapi.json and every /.well-known/ location.
+  detail: Every path on docs.10xbanking.com — including /, /reference and /changelog — returns HTTP 302
+    to https://dash.readme.com/to/docs-10xbanking, the ReadMe login for 10x's private documentation project,
+    and the sandbox API host 10x names in its own public Postman environment answers HTTP 401 (code 401.002.001)
+    on every path including /openapi.json and every /.well-known/ location.
   evidence:
-    - url: https://docs.10xbanking.com/
-      status: 302
-    - url: https://docs.10xbanking.com/reference
-      status: 302
-    - url: https://api.sandbox.10xbanking.com/openapi.json
-      status: 401
-    - url: https://api.sandbox.10xbanking.com/.well-known/oauth-authorization-server
-      status: 401
-    - url: https://postman.10xbanking.com/
-      status: 404
-    - url: https://www.10xbanking.com/.well-known/security.txt
-      status: 200
+  - url: https://docs.10xbanking.com/
+    status: 302
+  - url: https://docs.10xbanking.com/reference
+    status: 302
+  - url: https://api.sandbox.10xbanking.com/openapi.json
+    status: 401
+  - url: https://api.sandbox.10xbanking.com/.well-known/oauth-authorization-server
+    status: 401
+  - url: https://postman.10xbanking.com/
+    status: 404
+  - url: https://www.10xbanking.com/.well-known/security.txt
+    status: 200
   checked: '2026-09-05'
