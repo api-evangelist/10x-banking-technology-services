@@ -16,20 +16,27 @@
       "method": "discovered"
     },
     {
-      "source": "https://docs.10xbanking.com/",
-      "feed_url": "https://docs.10xbanking.com/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
       "source": "https://www.10xbanking.com/insights/rss.xml",
       "feed_url": "https://www.10xbanking.com/insights/rss.xml",
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://www.10xbanking.com/engineering/rss.xml",
+      "feed_url": "https://www.10xbanking.com/engineering/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://docs.10xbanking.com/",
+      "feed_url": "https://docs.10xbanking.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 20,
+  "fetched": "2026-10-17T14:53:57Z"
 }
