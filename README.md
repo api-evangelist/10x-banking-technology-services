@@ -64,38 +64,104 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-10x Banking Technology Services is a London-headquartered cloud-native core banking platform
-vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and "meta core" platform
-runs retail, business, corporate and embedded-finance banking for institutions including Chase UK,
-Westpac, Old Mutual, The Co-operative Bank and West Brom Building Society. The platform is sold as
-an API-first managed core: banks configure banking products rather than rebuild them, extend the
-core through the ProductKit SDK, APIs, templates, console and CLI tooling, and consume real-time
-event streams.
+10x Banking Technology Services is a London-headquartered cloud-native core banking platform vendor, founded by former Barclays CEO Antony Jenkins, whose SuperCore and "meta core" platform runs retail, business, corporate and embedded-finance banking for institutions including Chase UK, Westpac, Old Mutual, The Co-operative Bank and West Brom Building Society. The platform is sold as an API-first managed core: banks configure products rather than rebuild them, extend the core through the ProductKit SDK, APIs, templates, console and CLI tooling in Java, JavaScript, Python, Go, Ruby or .NET, and consume real-time event streams. The API contract itself is not public — the developer documentation at docs.10xbanking.com redirects every path to a ReadMe login, and the sandbox API host returns a blanket 401 — so this profile records the public surface only.
 
-## Why this profile is thin
+**Areas:** Financial Services · Banking · Core Banking · Cloud-Native · Banking as a Service · Embedded Finance · Payments · Lending · Deposits · Cards · Event-Driven · United Kingdom
 
-**The API contract is not public.** Every path on `docs.10xbanking.com` — including `/`,
-`/reference` and `/changelog` — returns HTTP 302 to the ReadMe login for 10x's private
-documentation project, and the sandbox API host returns HTTP 401 on every path, including
-`/openapi.json` and every `/.well-known/` location. As of 2026-09-05 there is no published
-OpenAPI, AsyncAPI, GraphQL SDL, WSDL, Protobuf, MCP server or agent card, and no first-party SDK
-on any public package registry.
+## 10x Banking Technology Services on APIs.io
 
-What 10x *does* publish, and what this profile is built from:
+Everything profiled for 10x Banking Technology Services is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/10x-banking-technology-services/](https://apis.io/providers/10x-banking-technology-services/)** — or go straight to one of the APIs or properties below.
 
-- A **public Postman environment** (`10x Banking`, team *10X Open Banking*) naming the sandbox base
-  URL `https://api.sandbox.10xbanking.com` and 61 entity variables that reveal the platform's
-  domain vocabulary. It is the only first-party machine-readable artifact 10x publishes. The
-  workspace itself contains no collections.
-- A **responsible disclosure policy** with safe-harbour language and a dedicated intake address.
-- A **`/.well-known/security.txt`** — served, but expired (`Expires: 2025-01-30`) and delivered as
-  `application/rtf` rather than the RFC 9116 `text/plain`.
-- A live **error envelope**, observed directly: `{ ref, status, code, message }` with dotted numeric
-  codes. Not RFC 9457.
+### APIs (1)
 
-Not published: pricing (`/pricing` 404), a status page (`status.10xbanking.com` does not resolve),
-a versioning or deprecation policy, an SLA, a changelog, a GitHub organisation, rate limits, or a
-trust centre.
+- [10x Banking Platform API](https://apis.io/apis/10x-banking-technology-services/10x-banking-platform-api/) — The REST API surface of the 10x SuperCore platform, covering parties, subscriptions, arrangements, transaction/deposit/loan/credit-card products, repayment…
 
-**Are we wrong?** If 10x publishes a spec, a status page or a changelog we did not find, open an
-issue and we will re-score within five business days.
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [10X Banking Technology Services Authentication](https://apis.io/security/10x-banking-technology-services/10x-banking-technology-services-authentication/)
+- [10X Banking Technology Services Domain Security](https://apis.io/security/10x-banking-technology-services/10x-banking-technology-services-domain-security/)
+- [10X Banking Technology Services Vulnerability Disclosure](https://apis.io/security/10x-banking-technology-services/10x-banking-technology-services-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [10X Banking Technology Services Plans Pricing](https://apis.io/plans/10x-banking-technology-services/10x-banking-technology-services-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [10X Banking Technology Services Rate Limits](https://apis.io/rate-limits/10x-banking-technology-services/10x-banking-technology-services-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.10xbanking.com/)
+- [Documentation](https://docs.10xbanking.com/)
+- [Sign up](https://www.10xbanking.com/book-a-demo)
+- [Support](https://www.10xbanking.com/contact-us)
+- [Blog](https://www.10xbanking.com/insights)
+- [Security](https://www.10xbanking.com/responsible-disclosure)
+- [Terms of service](https://www.10xbanking.com/platform-evaluation-agreement)
+- [Privacy policy](https://www.10xbanking.com/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 28.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 74.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 34.2 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/10x-banking-technology-services/](https://apis.io/providers/10x-banking-technology-services/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for 10x Banking Technology Services: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/10x-banking-technology-services/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
